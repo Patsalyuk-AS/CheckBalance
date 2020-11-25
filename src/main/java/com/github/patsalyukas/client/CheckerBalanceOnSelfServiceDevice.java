@@ -7,7 +7,7 @@ import com.github.patsalyukas.outsideclasses.Card;
 import com.github.patsalyukas.outsideclasses.Currency;
 import com.github.patsalyukas.outsideclasses.NotValidCardException;
 
-import java.math.BigInteger;
+import java.math.BigDecimal;
 
 public class CheckerBalanceOnSelfServiceDevice extends ClientOfSelfServiceDevice {
 
@@ -15,7 +15,7 @@ public class CheckerBalanceOnSelfServiceDevice extends ClientOfSelfServiceDevice
 
     public CheckerBalanceOnSelfServiceDevice(Passport passport, SelfServiceDevice selfServiceDevice, Card card) {
         super(passport, selfServiceDevice, card);
-        balance = new Balance(Currency.RUB, new BigInteger("0"));
+        balance = new Balance(Currency.RUB, new BigDecimal("0"));
     }
 
     public Balance checkBalance() throws SelfServiceDeviceBrokenException, NotValidCardException {

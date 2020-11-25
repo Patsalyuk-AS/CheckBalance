@@ -17,10 +17,10 @@ public class ATM implements SelfServiceDevice {
     public Result takeCard(Card card) {
         try {
             checkForDamage();
-            return (dataBase.validateCard(card) ? Result.SUCCESS : Result.FAILURE);
-        } catch (SelfServiceDeviceBrokenException selfServiceDeviceBrokenException) {
+        } catch (SelfServiceDeviceBrokenException exception) {
             return Result.FAILURE;
         }
+        return (dataBase.validateCard(card) ? Result.SUCCESS : Result.FAILURE);
     }
 
     @Override
@@ -28,10 +28,8 @@ public class ATM implements SelfServiceDevice {
         try {
             checkForDamage();
             return (dataBase.getBalance(card));
-        } catch (SelfServiceDeviceBrokenException selfServiceDeviceBrokenException) {
-            throw new SelfServiceDeviceBrokenException("I am out of order!");
-        } catch (NotValidCardException notValidCardException) {
-            throw new NotValidCardException("The card is not valid!");
+        } catch (SelfServiceDeviceBrokenException | NotValidCardException exception) {
+            throw exception;
         }
     }
 
@@ -39,10 +37,10 @@ public class ATM implements SelfServiceDevice {
     public Result giveBackCard(Card card) {
         try {
             checkForDamage();
-            return Result.SUCCESS;
-        } catch (SelfServiceDeviceBrokenException selfServiceDeviceBrokenException) {
+        } catch (SelfServiceDeviceBrokenException exception) {
             return Result.FAILURE;
         }
+        return Result.SUCCESS;
     }
 
     private void checkForDamage() throws SelfServiceDeviceBrokenException {

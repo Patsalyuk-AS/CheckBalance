@@ -7,7 +7,7 @@ import com.github.patsalyukas.device.SelfServiceDeviceBrokenException;
 import com.github.patsalyukas.outsideclasses.*;
 import org.junit.jupiter.api.Test;
 
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,7 +20,7 @@ class CheckerBalanceOnSelfServiceDeviceTest {
     Passport passport = new Passport(7900, 156423, "Ivanov", "Ivan", "Ivanovich", LocalDate.of(1980, 2, 15), address);
     SelfServiceDevice selfServiceDevice = new ATM(100000, address, dataBase, new ReliabilityOfSelfServiceDevice(1000));
     CheckerBalanceOnSelfServiceDevice client = new CheckerBalanceOnSelfServiceDevice(passport, selfServiceDevice, card);
-    Balance balance = new Balance(Currency.RUB, new BigInteger("15000"));
+    Balance balance = new Balance(Currency.RUB, new BigDecimal("15000"));
 
     @Test
     void checkBalance() throws SelfServiceDeviceBrokenException, NotValidCardException {

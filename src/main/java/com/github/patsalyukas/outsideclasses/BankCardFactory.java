@@ -1,6 +1,6 @@
 package com.github.patsalyukas.outsideclasses;
 
-import java.math.BigInteger;
+import java.math.BigDecimal;
 
 public class BankCardFactory implements FactoryForCards {
 
@@ -11,7 +11,7 @@ public class BankCardFactory implements FactoryForCards {
     }
 
     @Override
-    public Balance createBalance(Currency currency, BigInteger sum) {
+    public Balance createBalance(Currency currency, BigDecimal sum) {
         return new Balance(currency, sum);
     }
 

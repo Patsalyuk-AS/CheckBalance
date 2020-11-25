@@ -4,13 +4,16 @@ package com.github.patsalyukas.device;
 
 public class ReliabilityOfSelfServiceDevice implements Reliability {
 
+    public static final int MIN_RELIABILITY = 0;
+    public static final int MAX_RELIABILITY = 1000;
+
     private int reliability;
 
     public ReliabilityOfSelfServiceDevice(int reliability) {
-        if (reliability < 0) {
-            this.reliability = 0;
-        } else if (reliability > 1000) {
-            this.reliability = 1000;
+        if (reliability < MIN_RELIABILITY) {
+            throw new IllegalArgumentException("Min value is " + MIN_RELIABILITY + ".");
+        } else if (reliability > MAX_RELIABILITY) {
+            throw new IllegalArgumentException("Max value is " + MAX_RELIABILITY + ".");
         } else {
             this.reliability = reliability;
         }

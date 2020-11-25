@@ -2,7 +2,7 @@ package com.github.patsalyukas.outsideclasses;
 
 import lombok.*;
 
-import java.math.BigInteger;
+import java.math.BigDecimal;
 
 @AllArgsConstructor
 @EqualsAndHashCode
@@ -12,6 +12,6 @@ import java.math.BigInteger;
 public class Balance {
 
     Currency currency;
-    BigInteger sum;
+    BigDecimal sum;
 
 }
