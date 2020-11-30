@@ -12,6 +12,8 @@ import lombok.Setter;
 @Setter
 public class ClientOfSelfServiceDevice {
 
+    private boolean haveGoneToSSD;
+    private boolean cardInserted;
     private Passport passport;
     private SelfServiceDevice selfServiceDevice;
     private Card card;
@@ -23,11 +25,14 @@ public class ClientOfSelfServiceDevice {
     }
 
     public Result goToSelfServiceDevice() {
+        haveGoneToSSD = true;
         return Moving.move(Wish.YES);
     }
 
     public Result insertCard() throws SelfServiceDeviceBrokenException {
-        return selfServiceDevice.takeCard(card);
+        Result result = selfServiceDevice.takeCard(card);
+        cardInserted = true;
+        return result;
     }
 
     public Result getBackCard() throws SelfServiceDeviceBrokenException {

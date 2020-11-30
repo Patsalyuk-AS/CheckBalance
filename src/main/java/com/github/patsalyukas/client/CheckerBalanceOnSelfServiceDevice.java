@@ -20,6 +20,12 @@ public class CheckerBalanceOnSelfServiceDevice extends ClientOfSelfServiceDevice
 
     public Balance checkBalance() throws SelfServiceDeviceBrokenException, NotValidCardException {
         SelfServiceDevice selfServiceDevice = getSelfServiceDevice();
+        if (!isHaveGoneToSSD()) {
+            goToSelfServiceDevice();
+        }
+        if (!isCardInserted()) {
+            insertCard();
+        }
         balance = selfServiceDevice.returnBalance(getCard());
         return balance;
 

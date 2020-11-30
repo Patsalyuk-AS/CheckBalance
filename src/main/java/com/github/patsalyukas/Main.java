@@ -19,11 +19,11 @@ public class Main {
         Passport clientPassport = new Passport(7900, 156423, "Ivanov", "Ivan", "Ivanovich", LocalDate.of(1980, 2, 15), clientAddress);
         Card card = new BankCard("4256123542134526", "30/22", "PETR", "IVANOV", 1020, 152, "DEBET");
         SelfServiceDevice atm = new ATM(100000, atmAddress, dataBase, new ReliabilityOfSelfServiceDevice(1000));
-        CheckerBalanceOnSelfServiceDevice client = new CheckerBalanceOnSelfServiceDevice(clientPassport, atm, card);
-        client.goToSelfServiceDevice();
-        client.insertCard();
-        System.out.println(client.checkBalance());
-        client.getBackCard();
+        CheckerBalanceOnSelfServiceDevice checkerBalanceOnSelfServiceDevice = new CheckerBalanceOnSelfServiceDevice(clientPassport, atm, card);
+//        checkerBalanceOnSelfServiceDevice.goToSelfServiceDevice();
+//        checkerBalanceOnSelfServiceDevice.insertCard();
+        System.out.println(checkerBalanceOnSelfServiceDevice.checkBalance());
+        checkerBalanceOnSelfServiceDevice.getBackCard();
     }
 
 }
