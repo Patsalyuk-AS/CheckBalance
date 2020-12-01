@@ -1,11 +1,10 @@
 package com.github.patsalyukas.client;
 
 import com.github.patsalyukas.device.SelfServiceDevice;
-import com.github.patsalyukas.device.SelfServiceDeviceBrokenException;
 import com.github.patsalyukas.outsideclasses.Balance;
+import com.github.patsalyukas.outsideclasses.BankException;
 import com.github.patsalyukas.outsideclasses.Card;
 import com.github.patsalyukas.outsideclasses.Currency;
-import com.github.patsalyukas.outsideclasses.NotValidCardException;
 
 import java.math.BigDecimal;
 
@@ -18,7 +17,7 @@ public class CheckerBalanceOnSelfServiceDevice extends ClientOfSelfServiceDevice
         balance = new Balance(Currency.RUB, new BigDecimal("0"));
     }
 
-    public Balance checkBalance() throws SelfServiceDeviceBrokenException, NotValidCardException {
+    public Balance checkBalance() throws BankException {
         SelfServiceDevice selfServiceDevice = getSelfServiceDevice();
         if (!isHaveGoneToSSD()) {
             goToSelfServiceDevice();

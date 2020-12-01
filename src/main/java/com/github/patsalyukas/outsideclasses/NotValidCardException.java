@@ -1,6 +1,6 @@
 package com.github.patsalyukas.outsideclasses;
 
-public class NotValidCardException extends Exception {
+public class NotValidCardException extends BankException {
 
     public NotValidCardException() {
     }

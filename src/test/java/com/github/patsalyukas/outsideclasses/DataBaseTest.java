@@ -20,7 +20,7 @@ class DataBaseTest {
     }
 
     @Test
-    void getBalance() throws NotValidCardException {
+    void getBalance() throws BankException {
         assertEquals(balance, dataBase.getBalance(card1));
 
     }

@@ -1,6 +1,8 @@
 package com.github.patsalyukas.device;
 
-public class SelfServiceDeviceBrokenException extends Exception {
+import com.github.patsalyukas.outsideclasses.BankException;
+
+public class SelfServiceDeviceBrokenException extends BankException {
 
     public SelfServiceDeviceBrokenException() {
     }

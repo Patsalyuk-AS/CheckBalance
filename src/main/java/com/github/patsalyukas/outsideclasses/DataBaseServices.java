@@ -4,6 +4,8 @@ public interface DataBaseServices {
 
     boolean validateCard(Card card);
 
-    Balance getBalance(Card card) throws NotValidCardException;
+    Balance getBalance(Card card) throws BankException;
+
+    void showHistoryOfRequestsOfBalances();
 
 }

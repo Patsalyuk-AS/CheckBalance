@@ -16,7 +16,7 @@ class ATMTest {
     SelfServiceDevice selfServiceDevice = new ATM(100000, address, dataBase, new ReliabilityOfSelfServiceDevice(1000));
 
     @Test
-    void returnBalance() throws SelfServiceDeviceBrokenException, NotValidCardException {
+    void returnBalance() throws BankException {
         assertEquals(balance, selfServiceDevice.returnBalance(card));
     }
 

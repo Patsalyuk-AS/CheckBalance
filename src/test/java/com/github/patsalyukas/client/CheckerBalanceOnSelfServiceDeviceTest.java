@@ -3,7 +3,6 @@ package com.github.patsalyukas.client;
 import com.github.patsalyukas.device.ATM;
 import com.github.patsalyukas.device.ReliabilityOfSelfServiceDevice;
 import com.github.patsalyukas.device.SelfServiceDevice;
-import com.github.patsalyukas.device.SelfServiceDeviceBrokenException;
 import com.github.patsalyukas.outsideclasses.*;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +22,7 @@ class CheckerBalanceOnSelfServiceDeviceTest {
     Balance balance = new Balance(Currency.RUB, new BigDecimal("15000"));
 
     @Test
-    void checkBalance() throws SelfServiceDeviceBrokenException, NotValidCardException {
+    void checkBalance() throws BankException {
         assertEquals(balance, client.checkBalance());
     }
 }

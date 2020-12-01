@@ -24,11 +24,11 @@ public class ATM implements SelfServiceDevice {
     }
 
     @Override
-    public Balance returnBalance(Card card) throws SelfServiceDeviceBrokenException, NotValidCardException {
+    public Balance returnBalance(Card card) throws BankException {
         try {
             checkForDamage();
             return (dataBase.getBalance(card));
-        } catch (SelfServiceDeviceBrokenException | NotValidCardException exception) {
+        } catch (SelfServiceDeviceBrokenException | NotValidCardException | RepeatRequestOfBalanceException exception) {
             throw exception;
         }
     }

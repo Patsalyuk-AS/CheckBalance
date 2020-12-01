@@ -2,12 +2,16 @@ package com.github.patsalyukas.outsideclasses;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Stream;
 
 public class DataBase implements DataBaseServices {
 
     private Map<Card, Balance> cards = new HashMap<>();
     private FactoryForCards factoryForCards;
+    private Set<Card> requestsOfBalances = new HashSet<>(20);
 
     public DataBase(FactoryForCards factoryForCards) {
         this.factoryForCards = factoryForCards;
@@ -25,12 +29,25 @@ public class DataBase implements DataBaseServices {
     }
 
     @Override
-    public Balance getBalance(Card card) throws NotValidCardException {
+    public Balance getBalance(Card card) throws BankException {
         if (!validateCard(card)) {
             throw new NotValidCardException("The card is invalid!");
         }
+        checkRepeatedRequestOfBalance(card);
+        requestsOfBalances.add(card);
         return cards.get(card);
+
     }
 
+    private void checkRepeatedRequestOfBalance(Card card) throws RepeatRequestOfBalanceException {
+        if (requestsOfBalances.contains(card)) {
+            throw new RepeatRequestOfBalanceException("The request has already existed.");
+        }
+    }
 
+    @Override
+    public void showHistoryOfRequestsOfBalances() {
+        Stream<Card> cardStream = requestsOfBalances.stream();
+        cardStream.forEach(System.out::println);
+    }
 }
