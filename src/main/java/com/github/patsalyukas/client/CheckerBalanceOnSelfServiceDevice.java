@@ -19,15 +19,10 @@ public class CheckerBalanceOnSelfServiceDevice extends ClientOfSelfServiceDevice
 
     public Balance checkBalance() throws BankException {
         SelfServiceDevice selfServiceDevice = getSelfServiceDevice();
-        if (!isHaveGoneToSSD()) {
-            goToSelfServiceDevice();
-        }
-        if (!isCardInserted()) {
-            insertCard();
-        }
+        goToSelfServiceDevice();
+        insertCard();
         balance = selfServiceDevice.returnBalance(getCard());
         return balance;
-
     }
 
 }

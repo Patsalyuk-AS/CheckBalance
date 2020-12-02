@@ -25,18 +25,23 @@ public class ClientOfSelfServiceDevice {
     }
 
     public Result goToSelfServiceDevice() {
-        haveGoneToSSD = true;
-        return Moving.move(Wish.YES);
+        if (haveGoneToSSD) return Result.SUCCESS;
+        Result result = Moving.move(Wish.YES);
+        if (result == Result.SUCCESS) haveGoneToSSD = true;
+        return result;
     }
 
     public Result insertCard() throws SelfServiceDeviceBrokenException {
+        if (cardInserted) return Result.SUCCESS;
         Result result = selfServiceDevice.takeCard(card);
-        cardInserted = true;
+        if (result == Result.SUCCESS) cardInserted = true;
         return result;
     }
 
     public Result getBackCard() throws SelfServiceDeviceBrokenException {
-        return selfServiceDevice.giveBackCard(card);
+        Result result = selfServiceDevice.giveBackCard(card);
+        if (result == Result.SUCCESS) cardInserted = false;
+        return result;
     }
 
 }
