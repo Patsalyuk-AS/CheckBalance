@@ -8,4 +8,6 @@ public interface DataBaseServices {
 
     void showHistoryOfRequestsOfBalances();
 
+    void handleBankException(BankException exception);
+
 }

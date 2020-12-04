@@ -1,17 +1,15 @@
 package com.github.patsalyukas.device;
 
+import lombok.Value;
 import com.github.patsalyukas.outsideclasses.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 
-@Getter
-@AllArgsConstructor
+@Value
 public class ATM implements SelfServiceDevice {
 
-    private int numberATM;
-    private Address addressATM;
-    private DataBaseServices dataBase;
-    private Reliability reliability;
+    private final int numberATM;
+    private final Address addressATM;
+    private final DataBaseServices dataBase;
+    private final Reliability reliability;
 
     @Override
     public Result takeCard(Card card) {
@@ -28,7 +26,10 @@ public class ATM implements SelfServiceDevice {
         try {
             checkForDamage();
             return (dataBase.getBalance(card));
-        } catch (SelfServiceDeviceBrokenException | NotValidCardException | RepeatRequestOfBalanceException exception) {
+        } catch (SelfServiceDeviceBrokenException exception) {
+            throw exception;
+        } catch (NotValidCardException | RepeatRequestOfBalanceException exception){
+            giveBackCard(card);
             throw exception;
         }
     }
@@ -41,6 +42,11 @@ public class ATM implements SelfServiceDevice {
             return Result.FAILURE;
         }
         return Result.SUCCESS;
+    }
+
+    @Override
+    public void handleError(BankException exception) {
+        dataBase.handleBankException(exception);
     }
 
     private void checkForDamage() throws SelfServiceDeviceBrokenException {

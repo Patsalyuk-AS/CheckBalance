@@ -1,12 +1,8 @@
 package com.github.patsalyukas.client;
 
-import com.github.patsalyukas.device.SelfServiceDevice;
-import com.github.patsalyukas.outsideclasses.Balance;
-import com.github.patsalyukas.outsideclasses.BankException;
-import com.github.patsalyukas.outsideclasses.Card;
-import com.github.patsalyukas.outsideclasses.Currency;
-
 import java.math.BigDecimal;
+import com.github.patsalyukas.outsideclasses.*;
+import com.github.patsalyukas.device.SelfServiceDevice;
 
 public class CheckerBalanceOnSelfServiceDevice extends ClientOfSelfServiceDevice {
 

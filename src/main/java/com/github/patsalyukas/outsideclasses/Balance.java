@@ -1,19 +1,12 @@
 package com.github.patsalyukas.outsideclasses;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
-
+import lombok.Value;
 import java.math.BigDecimal;
 
-@AllArgsConstructor
-@EqualsAndHashCode
-@Getter
-@ToString
+@Value
 public class Balance {
 
-    Currency currency;
-    BigDecimal sum;
+    private final Currency currency;
+    private final BigDecimal sum;
 
 }

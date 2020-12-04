@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ClientOfSelfServiceDeviceTest {
 
-    Card card = new BankCard("4256123542131234", "12/21", "IVAN", "PETROV", 1532, 652, "DEBET");
+    Card card = new BankCard("4256123542131234", "12/21", "IVAN", "PETROV", 1532, 652, BankCardType.DEBET);
     DataBase dataBase = new DataBase(new BankCardFactory());
     Address atmAddress = new Address("Moscow area", "Moscow", "Pionerskaya", "100");
     Address clientAddress = new Address("Moscow area", "Moscow", "Pionerskaya", "124a", "54");

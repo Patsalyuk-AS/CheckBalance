@@ -1,9 +1,6 @@
 package com.github.patsalyukas.device;
 
-import com.github.patsalyukas.outsideclasses.Balance;
-import com.github.patsalyukas.outsideclasses.BankException;
-import com.github.patsalyukas.outsideclasses.Card;
-import com.github.patsalyukas.outsideclasses.Result;
+import com.github.patsalyukas.outsideclasses.*;
 
 public interface SelfServiceDevice {
 
@@ -12,5 +9,7 @@ public interface SelfServiceDevice {
     Balance returnBalance(Card card) throws BankException;
 
     Result giveBackCard(Card card) throws SelfServiceDeviceBrokenException;
+
+    void handleError(BankException exception);
 
 }

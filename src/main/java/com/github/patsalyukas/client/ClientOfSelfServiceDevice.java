@@ -1,12 +1,10 @@
 package com.github.patsalyukas.client;
 
-import com.github.patsalyukas.device.SelfServiceDevice;
-import com.github.patsalyukas.device.SelfServiceDeviceBrokenException;
-import com.github.patsalyukas.outsideclasses.Card;
-import com.github.patsalyukas.outsideclasses.Moving;
-import com.github.patsalyukas.outsideclasses.Result;
 import lombok.Getter;
 import lombok.Setter;
+import com.github.patsalyukas.outsideclasses.*;
+import com.github.patsalyukas.device.SelfServiceDevice;
+import com.github.patsalyukas.device.SelfServiceDeviceBrokenException;
 
 @Getter
 @Setter

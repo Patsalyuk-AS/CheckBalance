@@ -1,21 +1,18 @@
 package com.github.patsalyukas.client;
 
-import com.github.patsalyukas.outsideclasses.Address;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
+import lombok.Value;
 import java.time.LocalDate;
+import com.github.patsalyukas.outsideclasses.Address;
 
-@Getter
-@AllArgsConstructor
+@Value
 public class Passport {
 
-    private int serial;
-    private int number;
-    private String lastName;
-    private String firstName;
-    private String middleName;
-    private LocalDate birthday;
-    private Address address;
+    private final int serial;
+    private final int number;
+    private final String lastName;
+    private final String firstName;
+    private final String middleName;
+    private final LocalDate birthday;
+    private final Address address;
 
 }

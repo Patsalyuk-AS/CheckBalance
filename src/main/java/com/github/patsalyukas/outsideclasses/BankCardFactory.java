@@ -6,7 +6,7 @@ public class BankCardFactory implements FactoryForCards {
 
 
     @Override
-    public Card createCard(String cardNumber, String expDate, String firstName, String lastName, int PIN, int CVI, String type) {
+    public Card createCard(String cardNumber, String expDate, String firstName, String lastName, int PIN, int CVI, BankCardType type) {
         return new BankCard(cardNumber, expDate, firstName, lastName, PIN, CVI, type);
     }
 
