@@ -1,7 +1,10 @@
 package com.github.patsalyukas;
 
-import com.github.patsalyukas.client.*;
-import com.github.patsalyukas.device.*;
+import com.github.patsalyukas.client.CheckerBalanceOnSelfServiceDevice;
+import com.github.patsalyukas.client.Passport;
+import com.github.patsalyukas.device.ATM;
+import com.github.patsalyukas.device.ReliabilityOfSelfServiceDevice;
+import com.github.patsalyukas.device.SelfServiceDevice;
 import com.github.patsalyukas.outsideclasses.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -12,7 +15,7 @@ public class Main {
 
     public static void main(String[] args) {
         log.info("Starting application.");
-        DataBase dataBase = new DataBase(new BankCardFactory());
+        DataBase<Card> dataBase = new DataBase<>(new BankCardFactory());
         Address clientAddress = new Address("Moscow area", "Moscow", "Pionerskaya", "124a", "54");
         Address atmAddress = new Address("Moscow area", "Moscow", "Pionerskaya", "100");
         Passport clientPassport = new Passport(7900, 156423, "Ivanov", "Ivan", "Ivanovich", LocalDate.of(1980, 2, 15), clientAddress);

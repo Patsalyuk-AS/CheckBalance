@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ClientOfSelfServiceDeviceTest {
 
     Card card = new BankCard("4256123542131234", "12/21", "IVAN", "PETROV", 1532, 652, BankCardType.DEBET);
-    DataBase dataBase = new DataBase(new BankCardFactory());
+    DataBase<Card> dataBase = new DataBase<>(new BankCardFactory());
     Address atmAddress = new Address("Moscow area", "Moscow", "Pionerskaya", "100");
     Address clientAddress = new Address("Moscow area", "Moscow", "Pionerskaya", "124a", "54");
     Passport clientPassport = new Passport(7900, 156423, "Ivanov", "Ivan", "Ivanovich", LocalDate.of(1980, 2, 15), clientAddress);

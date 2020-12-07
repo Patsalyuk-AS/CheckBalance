@@ -1,14 +1,14 @@
 package com.github.patsalyukas.device;
 
-import lombok.Value;
 import com.github.patsalyukas.outsideclasses.*;
+import lombok.Value;
 
 @Value
 public class ATM implements SelfServiceDevice {
 
     private final int numberATM;
     private final Address addressATM;
-    private final DataBaseServices dataBase;
+    private final DataBaseServices<Card> dataBase;
     private final Reliability reliability;
 
     @Override

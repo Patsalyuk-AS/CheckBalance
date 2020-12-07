@@ -1,12 +1,16 @@
 package com.github.patsalyukas.outsideclasses;
 
-public interface DataBaseServices {
+import java.math.BigDecimal;
 
-    boolean validateCard(Card card);
+public interface DataBaseServices<E extends Card> {
 
-    Balance getBalance(Card card) throws BankException;
+    boolean validateCard(E e);
+
+    Balance getBalance(E e) throws BankException;
 
     void showHistoryOfRequestsOfBalances();
+
+    void addCardToDataBase(String cardNumber, String expDate, String firstName, String lastName, int PIN, int CVI, BankCardType type, Currency currency, BigDecimal sum);
 
     void handleBankException(BankException exception);
 
