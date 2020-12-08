@@ -16,17 +16,23 @@ public class Main {
     public static void main(String[] args) {
         log.info("Starting application.");
         DataBase<Card> dataBase = new DataBase<>(new BankCardFactory());
+        try {
+            dataBase.inializeDataBase();
+        } catch (IllegalCardParametersException exception) {
+            dataBase.handleBankException(exception);
+        }
+
         Address clientAddress = new Address("Moscow area", "Moscow", "Pionerskaya", "124a", "54");
         Address atmAddress = new Address("Moscow area", "Moscow", "Pionerskaya", "100");
         Passport clientPassport = new Passport(7900, 156423, "Ivanov", "Ivan", "Ivanovich", LocalDate.of(1980, 2, 15), clientAddress);
-        Card card = new BankCard("4256123542134526", "30/22", "PETR", "IVANOV", 1020, 152, BankCardType.DEBET);
+        Card card = new BankCard("PETR", "IVANOV", "4256123542134526", "30/12", "1020", "152", BankCardType.DEBET);
         SelfServiceDevice atm = new ATM(100000, atmAddress, dataBase, new ReliabilityOfSelfServiceDevice(1000));
         CheckerBalanceOnSelfServiceDevice checkerBalanceOnSelfServiceDevice = new CheckerBalanceOnSelfServiceDevice(clientPassport, atm, card);
         try {
             System.out.println(checkerBalanceOnSelfServiceDevice.checkBalance());
             checkerBalanceOnSelfServiceDevice.getBackCard();
             System.out.println(checkerBalanceOnSelfServiceDevice.checkBalance());
-        } catch (BankException exception){
+        } catch (BankException exception) {
             atm.handleError(exception);
         }
         dataBase.showHistoryOfRequestsOfBalances();

@@ -18,7 +18,6 @@ public class DataBase<E extends Card> implements DataBaseServices<E> {
 
     public DataBase(FactoryForCards factoryForCards) {
         this.factoryForCards = factoryForCards;
-        inializeDataBase();
     }
 
     @Override
@@ -44,8 +43,8 @@ public class DataBase<E extends Card> implements DataBaseServices<E> {
     }
 
     @Override
-    public void addCardToDataBase(String cardNumber, String expDate, String firstName, String lastName, int PIN, int CVI, BankCardType type, Currency currency, BigDecimal sum) {
-        cards.put(factoryForCards.createCard(cardNumber, expDate, firstName, lastName, PIN, CVI, type), factoryForCards.createBalance(currency, sum));
+    public void addCardToDataBase(String firstName, String lastName, String cardNumber, String expDate, String PIN, String CVI, BankCardType type, Currency currency, BigDecimal sum) throws IllegalCardParametersException {
+        cards.put(factoryForCards.createCard(firstName, lastName, cardNumber, expDate, PIN, CVI, type), factoryForCards.createBalance(currency, sum));
     }
 
     @Override
@@ -60,13 +59,15 @@ public class DataBase<E extends Card> implements DataBaseServices<E> {
         }
     }
 
-    private void inializeDataBase() {
-        addCardToDataBase("4256123542131234", "12/21", "IVAN", "PETROV", 1532, 652, BankCardType.DEBET, Currency.RUB, new BigDecimal("15000"));
-        addCardToDataBase("4256123542134526", "30/22", "PETR", "IVANOV", 1020, 152, BankCardType.DEBET, Currency.RUB, new BigDecimal("30000"));
-        addCardToDataBase("4256123542137536", "15/22", "SERGEY", "SIDOROV", 2534, 752, BankCardType.DEBET, Currency.RUB, new BigDecimal("1000"));
-        addCardToDataBase("4256123542131526", "05/22", "ELENA", "IVANOVA", 8563, 632, BankCardType.DEBET, Currency.RUB, new BigDecimal("5000"));
-        addCardToDataBase("4256123542131010", "24/22", "OXANA", "PETROVA", 1145, 752, BankCardType.DEBET, Currency.RUB, new BigDecimal("4000"));
-        addCardToDataBase("4256123542132233", "11/21", "SVETLANA", "SIDOROVA", 5462, 156, BankCardType.DEBET, Currency.RUB, new BigDecimal("2000"));
+    //вспомогательный метод для наполнения базы
+    public void inializeDataBase() throws IllegalCardParametersException {
+        addCardToDataBase("IVAN", "PETROV", "4256123542131234", "12/21", "1532", "652", BankCardType.DEBET, Currency.RUB, new BigDecimal("15000"));
+        addCardToDataBase("PETR", "IVANOV", "4256123542134526", "30/12", "1020", "152", BankCardType.DEBET, Currency.RUB, new BigDecimal("30000"));
+        addCardToDataBase("SERGEY", "SIDOROV", "4256123542137536", "15/22", "2534", "752", BankCardType.DEBET, Currency.RUB, new BigDecimal("1000"));
+        addCardToDataBase("ELENA", "IVANOVA", "4256123542131526", "05/22", "8563", "632", BankCardType.DEBET, Currency.RUB, new BigDecimal("5000"));
+        addCardToDataBase("OXANA", "PETROVA", "4256123542131010", "24/22", "1145", "752", BankCardType.DEBET, Currency.RUB, new BigDecimal("4000"));
+        addCardToDataBase("SVETLANA", "SIDOROVA", "4256123542132233", "11/21", "5462", "156", BankCardType.DEBET, Currency.RUB, new BigDecimal("2000"));
+
     }
 
 }

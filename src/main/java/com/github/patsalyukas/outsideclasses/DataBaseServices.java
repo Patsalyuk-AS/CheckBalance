@@ -10,7 +10,7 @@ public interface DataBaseServices<E extends Card> {
 
     void showHistoryOfRequestsOfBalances();
 
-    void addCardToDataBase(String cardNumber, String expDate, String firstName, String lastName, int PIN, int CVI, BankCardType type, Currency currency, BigDecimal sum);
+    void addCardToDataBase(String firstName, String lastName, String cardNumber, String expDate, String PIN, String CVI, BankCardType type, Currency currency, BigDecimal sum) throws IllegalCardParametersException;
 
     void handleBankException(BankException exception);
 
