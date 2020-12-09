@@ -17,9 +17,9 @@ public class Main {
 
     public static void main(String[] args) throws NoSuchProviderException, NoSuchAlgorithmException {
         log.info("Starting application.");
-        DataBase<Card> dataBase = new DataBase<>(new BankCardFactory());
+        CardDataBase<Card> dataBase = new CardDataBase<>(new BankCardFactory());
         try {
-            dataBase.inializeDataBase();
+            dataBase.initializeDataBase();
         } catch (IllegalCardParametersException exception) {
             dataBase.handleBankException(exception);
         }

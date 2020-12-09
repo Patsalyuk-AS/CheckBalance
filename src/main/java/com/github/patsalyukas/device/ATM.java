@@ -11,7 +11,7 @@ public class ATM implements SelfServiceDevice {
 
     private final int numberATM;
     private final Address addressATM;
-    private final DataBaseServices<Card> dataBase;
+    private final CardDataBaseServices<Card> cardDataBase;
     private final Reliability reliability;
 
     @Override
@@ -21,14 +21,14 @@ public class ATM implements SelfServiceDevice {
         } catch (SelfServiceDeviceBrokenException exception) {
             return Result.FAILURE;
         }
-        return (dataBase.validateCard(card) ? Result.SUCCESS : Result.FAILURE);
+        return (cardDataBase.validateCard(card) ? Result.SUCCESS : Result.FAILURE);
     }
 
     @Override
     public Balance returnBalance(Card card) throws BankException, NoSuchProviderException, NoSuchAlgorithmException {
         try {
             checkForDamage();
-            return (dataBase.getBalance(card));
+            return (cardDataBase.getBalance(card));
         } catch (SelfServiceDeviceBrokenException exception) {
             throw exception;
         } catch (NotValidCardException | RepeatRequestOfBalanceException exception){
@@ -49,10 +49,10 @@ public class ATM implements SelfServiceDevice {
 
     @Override
     public void handleError(BankException exception) {
-        dataBase.handleBankException(exception);
+        cardDataBase.handleBankException(exception);
     }
 
-    private void checkForDamage() throws SelfServiceDeviceBrokenException, NoSuchAlgorithmException, NoSuchProviderException {
+    private void checkForDamage() throws SelfServiceDeviceBrokenException, NoSuchProviderException, NoSuchAlgorithmException {
         if (reliability.checkDeviceStatus() == DeviceStatus.BAD) {
             throw new SelfServiceDeviceBrokenException("I am out of order!");
         }

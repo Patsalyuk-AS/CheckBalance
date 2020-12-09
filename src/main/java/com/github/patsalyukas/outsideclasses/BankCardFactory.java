@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class BankCardFactory implements FactoryForCards {
+public class BankCardFactory implements FactoryForCards<Card> {
 
     private static final Pattern patternCardNumber = Pattern.compile("^\\d{16}$");
     private static final Pattern patternPIN = Pattern.compile("^\\d{4}$");
@@ -14,6 +14,12 @@ public class BankCardFactory implements FactoryForCards {
     public Card createCard(String firstName, String lastName, String cardNumber, String expDate, String pin, String cvi, BankCardType type) throws IllegalCardParametersException {
         validateCardParameters(cardNumber, pin, cvi);
         return new BankCard(firstName, lastName, cardNumber, expDate, pin, cvi, type);
+    }
+
+    @Override
+    public Card createCard(Card card) throws IllegalCardParametersException {
+        validateCardParameters(card.getNumber(), card.getPin(), card.getCvi());
+        return card;
     }
 
     @Override

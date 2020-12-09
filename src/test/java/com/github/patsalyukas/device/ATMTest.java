@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ATMTest {
 
-    DataBase<Card> dataBase = new DataBase<>(new BankCardFactory());
+    CardDataBase<Card> dataBase = new CardDataBase<>(new BankCardFactory());
     Card card = new BankCard("IVAN", "PETROV", "4256123542131234", "12/21", "1532", "652", BankCardType.DEBET);
     Balance balance = new Balance(Currency.RUB, new BigDecimal("15000"));
     Address address = new Address("Moscow area", "Moscow", "Pionerskaya", "100");
@@ -20,7 +20,7 @@ class ATMTest {
 
     @BeforeEach
     void setUp() throws IllegalCardParametersException {
-        dataBase.inializeDataBase();
+        dataBase.initializeDataBase();
     }
 
     @Test
