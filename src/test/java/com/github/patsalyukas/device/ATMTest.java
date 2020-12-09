@@ -5,6 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -22,12 +24,12 @@ class ATMTest {
     }
 
     @Test
-    void returnBalance() throws BankException {
+    void returnBalance() throws BankException, NoSuchProviderException, NoSuchAlgorithmException {
         assertEquals(balance, selfServiceDevice.returnBalance(card));
     }
 
     @Test
-    void giveBackCard() throws SelfServiceDeviceBrokenException {
+    void giveBackCard() throws SelfServiceDeviceBrokenException, NoSuchProviderException, NoSuchAlgorithmException {
         assertEquals(Result.SUCCESS, selfServiceDevice.giveBackCard(card));
     }
 }

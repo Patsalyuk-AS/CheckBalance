@@ -8,6 +8,8 @@ import com.github.patsalyukas.outsideclasses.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -33,12 +35,12 @@ class ClientOfSelfServiceDeviceTest {
     }
 
     @Test
-    void insertCard() throws SelfServiceDeviceBrokenException {
+    void insertCard() throws SelfServiceDeviceBrokenException, NoSuchProviderException, NoSuchAlgorithmException {
         assertEquals(Result.SUCCESS, ClientOfSelfServiceDevice.insertCard());
     }
 
     @Test
-    void getBackCard() throws SelfServiceDeviceBrokenException {
+    void getBackCard() throws SelfServiceDeviceBrokenException, NoSuchProviderException, NoSuchAlgorithmException {
         assertEquals(Result.SUCCESS, ClientOfSelfServiceDevice.getBackCard());
     }
 }

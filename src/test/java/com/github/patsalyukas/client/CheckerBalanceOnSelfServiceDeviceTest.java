@@ -8,6 +8,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -28,7 +30,7 @@ class CheckerBalanceOnSelfServiceDeviceTest {
     }
 
     @Test
-    void checkBalance() throws BankException {
+    void checkBalance() throws BankException, NoSuchProviderException, NoSuchAlgorithmException {
         assertEquals(balance, client.checkBalance());
     }
 }
