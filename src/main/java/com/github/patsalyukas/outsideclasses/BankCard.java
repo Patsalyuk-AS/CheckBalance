@@ -1,28 +1,22 @@
 package com.github.patsalyukas.outsideclasses;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.Value;
 
-@ToString
-
-@Getter
-@AllArgsConstructor
-@EqualsAndHashCode
+@Value
 public class BankCard implements Card {
 
-    private String cardNumber;
-    private String expDate;
-    private String firstName;
-    private String lastName;
-    private int PIN;
-    private int CVI;
-    private String type;
+    private final String firstName;
+    private final String lastName;
+    private final String cardNumber;
+    private final String expDate;
+    private final String pin;
+    private final String cvi;
+    private final BankCardType type;
 
     @Override
     public String getNumber() {
         return (getCardNumber());
     }
+
 
 }

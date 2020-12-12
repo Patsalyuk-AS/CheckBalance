@@ -1,51 +1,58 @@
 package com.github.patsalyukas.device;
 
 import com.github.patsalyukas.outsideclasses.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Value;
 
-@Getter
-@AllArgsConstructor
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+
+@Value
 public class ATM implements SelfServiceDevice {
 
-    private int numberATM;
-    private Address addressATM;
-    private DataBaseServices dataBase;
-    private Reliability reliability;
+    private final int numberATM;
+    private final Address addressATM;
+    private final CardDataBaseServices<Card> cardDataBase;
+    private final Reliability reliability;
 
     @Override
-    public Result takeCard(Card card) {
+    public Result takeCard(Card card) throws NoSuchProviderException, NoSuchAlgorithmException {
         try {
             checkForDamage();
-            return (dataBase.validateCard(card) ? Result.SUCCESS : Result.FAILURE);
-        } catch (SelfServiceDeviceBrokenException selfServiceDeviceBrokenException) {
+        } catch (SelfServiceDeviceBrokenException exception) {
             return Result.FAILURE;
         }
+        return (cardDataBase.validateCard(card) ? Result.SUCCESS : Result.FAILURE);
     }
 
     @Override
-    public Balance returnBalance(Card card) throws SelfServiceDeviceBrokenException, NotValidCardException {
+    public Balance returnBalance(Card card) throws BankException, NoSuchProviderException, NoSuchAlgorithmException {
         try {
             checkForDamage();
-            return (dataBase.getBalance(card));
-        } catch (SelfServiceDeviceBrokenException selfServiceDeviceBrokenException) {
-            throw new SelfServiceDeviceBrokenException("I am out of order!");
-        } catch (NotValidCardException notValidCardException) {
-            throw new NotValidCardException("The card is not valid!");
+            return (cardDataBase.getBalance(card));
+        } catch (SelfServiceDeviceBrokenException exception) {
+            throw exception;
+        } catch (NotValidCardException | RepeatRequestOfBalanceException exception){
+            giveBackCard(card);
+            throw exception;
         }
     }
 
     @Override
-    public Result giveBackCard(Card card) {
+    public Result giveBackCard(Card card) throws NoSuchProviderException, NoSuchAlgorithmException {
         try {
             checkForDamage();
-            return Result.SUCCESS;
-        } catch (SelfServiceDeviceBrokenException selfServiceDeviceBrokenException) {
+        } catch (SelfServiceDeviceBrokenException exception) {
             return Result.FAILURE;
         }
+        return Result.SUCCESS;
     }
 
-    private void checkForDamage() throws SelfServiceDeviceBrokenException {
+    @Override
+    public void handleError(BankException exception) {
+        cardDataBase.handleBankException(exception);
+    }
+
+    private void checkForDamage() throws SelfServiceDeviceBrokenException, NoSuchProviderException, NoSuchAlgorithmException {
         if (reliability.checkDeviceStatus() == DeviceStatus.BAD) {
             throw new SelfServiceDeviceBrokenException("I am out of order!");
         }

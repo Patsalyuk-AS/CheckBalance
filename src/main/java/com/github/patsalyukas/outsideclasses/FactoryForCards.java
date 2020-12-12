@@ -1,9 +1,11 @@
 package com.github.patsalyukas.outsideclasses;
 
-import java.math.BigInteger;
+import java.math.BigDecimal;
 
-public interface FactoryForCards {
-    Card createCard(String cardNumber, String expDate, String firstName, String lastName, int PIN, int CVI, String type);
+public interface FactoryForCards<E extends Card> {
+    E createCard(String firstName, String lastName, String cardNumber, String expDate, String pin, String cvi, BankCardType type) throws IllegalCardParametersException;
 
-    Balance createBalance(Currency currency, BigInteger sum);
+    E createCard(E e) throws IllegalCardParametersException;
+
+    Balance createBalance(Currency currency, BigDecimal sum);
 }

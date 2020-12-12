@@ -7,11 +7,11 @@ import lombok.Getter;
 @AllArgsConstructor
 public class Address {
 
-    private String region;
-    private String city;
-    private String street;
-    private String house;
-    private String flat;
+    private final String region;
+    private final String city;
+    private final String street;
+    private final String house;
+    private final String flat;
 
     public Address(String region, String city, String street, String house) {
         this(region, city, street, house, "-");

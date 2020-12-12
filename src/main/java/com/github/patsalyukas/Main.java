@@ -5,25 +5,40 @@ import com.github.patsalyukas.client.Passport;
 import com.github.patsalyukas.device.ATM;
 import com.github.patsalyukas.device.ReliabilityOfSelfServiceDevice;
 import com.github.patsalyukas.device.SelfServiceDevice;
-import com.github.patsalyukas.device.SelfServiceDeviceBrokenException;
 import com.github.patsalyukas.outsideclasses.*;
+import lombok.extern.slf4j.Slf4j;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.time.LocalDate;
 
+@Slf4j
 public class Main {
 
-    public static void main(String[] args) throws SelfServiceDeviceBrokenException, NotValidCardException {
-        DataBase dataBase = new DataBase(new BankCardFactory());
+    public static void main(String[] args) throws NoSuchProviderException, NoSuchAlgorithmException {
+        log.info("Starting application.");
+        CardDataBase<Card> dataBase = new CardDataBase<>(new BankCardFactory());
+        try {
+            dataBase.initializeDataBase();
+        } catch (IllegalCardParametersException exception) {
+            dataBase.handleBankException(exception);
+        }
+
         Address clientAddress = new Address("Moscow area", "Moscow", "Pionerskaya", "124a", "54");
         Address atmAddress = new Address("Moscow area", "Moscow", "Pionerskaya", "100");
         Passport clientPassport = new Passport(7900, 156423, "Ivanov", "Ivan", "Ivanovich", LocalDate.of(1980, 2, 15), clientAddress);
-        Card card = new BankCard("4256123542134526", "30/22", "PETR", "IVANOV", 1020, 152, "DEBET");
+        Card card = new BankCard("PETR", "IVANOV", "4256123542134526", "30/12", "1020", "152", BankCardType.DEBET);
         SelfServiceDevice atm = new ATM(100000, atmAddress, dataBase, new ReliabilityOfSelfServiceDevice(1000));
-        CheckerBalanceOnSelfServiceDevice client = new CheckerBalanceOnSelfServiceDevice(clientPassport, atm, card);
-        client.goToSelfServiceDevice();
-        client.insertCard();
-        System.out.println(client.checkBalance());
-        client.getBackCard();
+        CheckerBalanceOnSelfServiceDevice checkerBalanceOnSelfServiceDevice = new CheckerBalanceOnSelfServiceDevice(clientPassport, atm, card);
+        try {
+            log.info(checkerBalanceOnSelfServiceDevice.checkBalance().toString());
+            checkerBalanceOnSelfServiceDevice.getBackCard();
+            log.info(checkerBalanceOnSelfServiceDevice.checkBalance().toString());
+        } catch (BankException exception) {
+            atm.handleError(exception);
+        }
+        dataBase.showHistoryOfRequestsOfBalances();
+        log.info("Finishing application.");
     }
 
 }

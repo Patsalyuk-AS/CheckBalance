@@ -4,4 +4,8 @@ public interface Card {
 
     String getNumber();
 
+    String getPin();
+
+    String getCvi();
+
 }

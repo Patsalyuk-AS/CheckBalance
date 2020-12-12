@@ -1,17 +1,20 @@
 package com.github.patsalyukas.client;
 
-import com.github.patsalyukas.device.SelfServiceDevice;
-import com.github.patsalyukas.device.SelfServiceDeviceBrokenException;
-import com.github.patsalyukas.outsideclasses.Card;
-import com.github.patsalyukas.outsideclasses.Moving;
-import com.github.patsalyukas.outsideclasses.Result;
 import lombok.Getter;
 import lombok.Setter;
+import com.github.patsalyukas.outsideclasses.*;
+import com.github.patsalyukas.device.SelfServiceDevice;
+import com.github.patsalyukas.device.SelfServiceDeviceBrokenException;
+
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 
 @Getter
 @Setter
 public class ClientOfSelfServiceDevice {
 
+    private boolean haveGoneToSSD;
+    private boolean cardInserted;
     private Passport passport;
     private SelfServiceDevice selfServiceDevice;
     private Card card;
@@ -23,15 +26,23 @@ public class ClientOfSelfServiceDevice {
     }
 
     public Result goToSelfServiceDevice() {
-        return Moving.move(Wish.YES);
+        if (haveGoneToSSD) return Result.SUCCESS;
+        Result result = Moving.move(Wish.YES);
+        if (result == Result.SUCCESS) haveGoneToSSD = true;
+        return result;
     }
 
-    public Result insertCard() throws SelfServiceDeviceBrokenException {
-        return selfServiceDevice.takeCard(card);
+    public Result insertCard() throws SelfServiceDeviceBrokenException, NoSuchProviderException, NoSuchAlgorithmException {
+        if (cardInserted) return Result.SUCCESS;
+        Result result = selfServiceDevice.takeCard(card);
+        if (result == Result.SUCCESS) cardInserted = true;
+        return result;
     }
 
-    public Result getBackCard() throws SelfServiceDeviceBrokenException {
-        return selfServiceDevice.giveBackCard(card);
+    public Result getBackCard() throws SelfServiceDeviceBrokenException, NoSuchProviderException, NoSuchAlgorithmException {
+        Result result = selfServiceDevice.giveBackCard(card);
+        if (result == Result.SUCCESS) cardInserted = false;
+        return result;
     }
 
 }

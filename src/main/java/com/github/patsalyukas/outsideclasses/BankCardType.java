@@ -1,7 +1,6 @@
 package com.github.patsalyukas.outsideclasses;
 
-public enum Currency {
+public enum BankCardType {
+    DEBET, CREDIT
 
-    RUB,
-    USD
 }
