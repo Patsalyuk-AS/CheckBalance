@@ -1,11 +1,11 @@
 package com.github.patsalyukas.outsideclasses;
 
 import java.math.BigDecimal;
+import java.util.function.BiPredicate;
 
 public interface FactoryForCards<E extends Card> {
-    E createCard(String firstName, String lastName, String cardNumber, String expDate, String pin, String cvi, BankCardType type) throws IllegalCardParametersException;
 
-    E createCard(E e) throws IllegalCardParametersException;
+    E createCard(BankCardInfo bankCardInfo, String pin, BankCardType type, BiPredicate<BankCardInfo, String> cardValidator) throws IllegalCardParametersException;
 
     Balance createBalance(Currency currency, BigDecimal sum);
 }

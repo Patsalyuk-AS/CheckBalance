@@ -12,15 +12,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ATMTest {
 
-    CardDataBase<Card> dataBase = new CardDataBase<>(new BankCardFactory());
-    Card card = new BankCard("IVAN", "PETROV", "4256123542131234", "12/21", "1532", "652", BankCardType.DEBET);
+    Card card = BankCard.getInstance(new BankCardInfo("IVAN", "PETROV", "4256123542131234", "12/21", "652"), "1532", BankCardType.DEBET);
+    CardDataBase<Card> dataBase = new CardDataBase<>();
     Balance balance = new Balance(Currency.RUB, new BigDecimal("15000"));
     Address address = new Address("Moscow area", "Moscow", "Pionerskaya", "100");
     SelfServiceDevice selfServiceDevice = new ATM(100000, address, dataBase, new ReliabilityOfSelfServiceDevice(1000));
 
+    ATMTest() throws IllegalCardParametersException {
+    }
+
     @BeforeEach
     void setUp() throws IllegalCardParametersException {
-        dataBase.initializeDataBase();
+        DataBaseIninializer.initializeDataBase(dataBase);
     }
 
     @Test

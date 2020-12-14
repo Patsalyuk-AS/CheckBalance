@@ -2,10 +2,10 @@ package com.github.patsalyukas.outsideclasses;
 
 public interface Card {
 
-    String getNumber();
+    BankCardInfo getCardInfo();
 
     String getPin();
 
-    String getCvi();
+    BankCardType getType();
 
 }

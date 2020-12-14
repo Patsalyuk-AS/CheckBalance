@@ -6,7 +6,7 @@ public interface CardDataBaseServices<E extends Card> {
 
     Balance getBalance(E e) throws BankException;
 
-    void showHistoryOfRequestsOfBalances();
+    void getHistoryOfRequestsOfBalances();
 
     void addCardToDataBase(E e, Balance balance) throws IllegalCardParametersException;
 
