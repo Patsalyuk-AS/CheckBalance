@@ -14,17 +14,17 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class CheckerBalanceOnSelfServiceDeviceTest {
+class CheckerBalanceTest {
 
     Card card = BankCard.getInstance(new BankCardInfo("IVAN", "PETROV", "4256123542131234", "12/21", "652"), "1532", BankCardType.DEBET);
     CardDataBase<Card> dataBase = new CardDataBase<>();
     Address address = new Address("Moscow area", "Moscow", "Pionerskaya", "100");
     Passport passport = new Passport(7900, 156423, "Ivanov", "Ivan", "Ivanovich", LocalDate.of(1980, 2, 15), address);
     SelfServiceDevice selfServiceDevice = new ATM(100000, address, dataBase, new ReliabilityOfSelfServiceDevice(1000));
-    CheckerBalanceOnSelfServiceDevice client = new CheckerBalanceOnSelfServiceDevice(passport, selfServiceDevice, card);
+    CheckerBalance client = new CheckerBalance(passport, selfServiceDevice, card);
     Balance balance = new Balance(Currency.RUB, new BigDecimal("15000"));
 
-    CheckerBalanceOnSelfServiceDeviceTest() throws IllegalCardParametersException {
+    CheckerBalanceTest() throws IllegalCardParametersException {
     }
 
     @BeforeEach

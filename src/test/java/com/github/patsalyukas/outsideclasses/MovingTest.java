@@ -9,7 +9,7 @@ class MovingTest {
 
     @Test
     void move() {
-        assertEquals(Result.SUCCESS, Moving.move(Wish.YES));
-        assertEquals(Result.FAILURE, Moving.move(Wish.NO));
+        assertEquals(Result.SUCCESS, new ClientMoving().move(Wish.YES));
+        assertEquals(Result.FAILURE, new ClientMoving().move(Wish.NO));
     }
 }

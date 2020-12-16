@@ -3,7 +3,7 @@ package com.github.patsalyukas.client;
 import com.github.patsalyukas.device.SelfServiceDevice;
 import com.github.patsalyukas.device.SelfServiceDeviceBrokenException;
 import com.github.patsalyukas.outsideclasses.Card;
-import com.github.patsalyukas.outsideclasses.Moving;
+import com.github.patsalyukas.outsideclasses.ClientMoving;
 import com.github.patsalyukas.outsideclasses.Result;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,7 +26,7 @@ public class ATMClient {
     }
 
     Result goToSelfServiceDevice() {
-        return Moving.move(Wish.YES);
+        return new ClientMoving().move(Wish.YES);
     }
 
     Result insertCard() throws SelfServiceDeviceBrokenException, NoSuchProviderException, NoSuchAlgorithmException {
