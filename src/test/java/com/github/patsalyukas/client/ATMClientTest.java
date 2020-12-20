@@ -76,20 +76,20 @@ class ATMClientTest {
     void getPassport() {
         ATMClient atmClient = new ATMClient(null, selfServiceDevice, card);
         Set<ConstraintViolation<ATMClient>> constraintViolations = validator.validate(atmClient);
-        assertEquals("не должно равняться null", constraintViolations.iterator().next().getMessage());
+        assertEquals("must not be null", constraintViolations.iterator().next().getMessage());
     }
 
     @Test
     void getSelfServiceDevice() {
         ATMClient atmClient = new ATMClient(passport, null, card);
         Set<ConstraintViolation<ATMClient>> constraintViolations = validator.validate(atmClient);
-        assertEquals("не должно равняться null", constraintViolations.iterator().next().getMessage());
+        assertEquals("must not be null", constraintViolations.iterator().next().getMessage());
     }
 
     @Test
     void getCard() {
         ATMClient atmClient = new ATMClient(passport, selfServiceDevice, null);
         Set<ConstraintViolation<ATMClient>> constraintViolations = validator.validate(atmClient);
-        assertEquals("не должно равняться null", constraintViolations.iterator().next().getMessage());
+        assertEquals("must not be null", constraintViolations.iterator().next().getMessage());
     }
 }
