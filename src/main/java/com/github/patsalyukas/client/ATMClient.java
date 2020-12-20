@@ -8,6 +8,7 @@ import com.github.patsalyukas.outsideclasses.Result;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 
@@ -15,8 +16,11 @@ import java.security.NoSuchProviderException;
 @Setter
 public class ATMClient {
 
+    @NotNull
     private Passport passport;
+    @NotNull
     private SelfServiceDevice selfServiceDevice;
+    @NotNull
     private Card card;
 
     public ATMClient(Passport passport, SelfServiceDevice selfServiceDevice, Card card) {

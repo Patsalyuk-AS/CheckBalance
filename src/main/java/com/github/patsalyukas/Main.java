@@ -27,7 +27,7 @@ public class Main {
         Address atmAddress = new Address("Moscow area", "Moscow", "Pionerskaya", "100");
         Passport clientPassport = new Passport(7900, 156423, "Ivanov", "Ivan", "Ivanovich", LocalDate.of(1980, 2, 15), clientAddress);
         Card card = BankCard.getInstance(new BankCardInfo("PETR", "IVANOV", "4256123542134526", "30/12", "152"), "1020", BankCardType.DEBET);
-        SelfServiceDevice atm = new ATM(100000, atmAddress, dataBase, new ReliabilityOfSelfServiceDevice(1000));
+        SelfServiceDevice atm = new ATM("100000", atmAddress, dataBase, new ReliabilityOfSelfServiceDevice(1000));
         CheckerBalance checkerBalance = new CheckerBalance(clientPassport, atm, card);
         try {
             log.info(checkerBalance.checkBalance().toString());

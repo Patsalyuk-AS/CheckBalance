@@ -4,7 +4,7 @@ import com.github.patsalyukas.device.ATM;
 import com.github.patsalyukas.device.ReliabilityOfSelfServiceDevice;
 import com.github.patsalyukas.device.SelfServiceDevice;
 import com.github.patsalyukas.outsideclasses.*;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -16,19 +16,22 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CheckerBalanceTest {
 
-    Card card = BankCard.getInstance(new BankCardInfo("IVAN", "PETROV", "4256123542131234", "12/21", "652"), "1532", BankCardType.DEBET);
-    CardDataBase<Card> dataBase = new CardDataBase<>();
-    Address address = new Address("Moscow area", "Moscow", "Pionerskaya", "100");
-    Passport passport = new Passport(7900, 156423, "Ivanov", "Ivan", "Ivanovich", LocalDate.of(1980, 2, 15), address);
-    SelfServiceDevice selfServiceDevice = new ATM(100000, address, dataBase, new ReliabilityOfSelfServiceDevice(1000));
-    CheckerBalance client = new CheckerBalance(passport, selfServiceDevice, card);
-    Balance balance = new Balance(Currency.RUB, new BigDecimal("15000"));
+    private static Card card;
+    private static CardDataBase<Card> dataBase = new CardDataBase<>();
+    private static Address address;
+    private static Passport passport;
+    private static SelfServiceDevice selfServiceDevice;
+    private static CheckerBalance client;
+    private static Balance balance;
 
-    CheckerBalanceTest() throws IllegalCardParametersException {
-    }
-
-    @BeforeEach
-    void setUp() throws IllegalCardParametersException {
+    @BeforeAll
+    static void setUp() throws IllegalCardParametersException {
+        card = BankCard.getInstance(new BankCardInfo("IVAN", "PETROV", "4256123542131234", "12/21", "652"), "1532", BankCardType.DEBET);
+        address = new Address("Moscow area", "Moscow", "Pionerskaya", "100");
+        passport = new Passport(7900, 156423, "Ivanov", "Ivan", "Ivanovich", LocalDate.of(1980, 2, 15), address);
+        selfServiceDevice = new ATM("100000", address, dataBase, new ReliabilityOfSelfServiceDevice(1000));
+        client = new CheckerBalance(passport, selfServiceDevice, card);
+        balance = new Balance(Currency.RUB, new BigDecimal("15000"));
         DataBaseIninializer.initializeDataBase(dataBase);
     }
 
