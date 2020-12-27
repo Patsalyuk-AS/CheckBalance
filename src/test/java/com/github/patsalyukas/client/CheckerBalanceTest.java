@@ -31,7 +31,8 @@ class CheckerBalanceTest {
         address = new Address("Moscow area", "Moscow", "Pionerskaya", "100");
         passport = new Passport(7900, 156423, "Ivanov", "Ivan", "Ivanovich", LocalDate.of(1980, Month.FEBRUARY, 15), address);
         selfServiceDevice = new ATM("100000", address, dataBase, new ReliabilityOfSelfServiceDevice(1000));
-        client = new CheckerBalance(passport, selfServiceDevice, card);
+        ATMClientService atmClientService = new ATMClient(passport, selfServiceDevice, card);
+        client = new CheckerBalance(atmClientService);
         balance = new Balance(Currency.RUB, new BigDecimal("15000"));
         DataBaseIninializer.initializeDataBase(dataBase);
     }

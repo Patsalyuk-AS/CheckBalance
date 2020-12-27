@@ -1,5 +1,7 @@
 package com.github.patsalyukas;
 
+import com.github.patsalyukas.client.ATMClient;
+import com.github.patsalyukas.client.ATMClientService;
 import com.github.patsalyukas.client.CheckerBalance;
 import com.github.patsalyukas.client.Passport;
 import com.github.patsalyukas.device.ATM;
@@ -34,7 +36,8 @@ public class Main {
         Passport clientPassport = new Passport(7900, 156423, "Ivanov", "Ivan", "Ivanovich", LocalDate.of(1980, Month.FEBRUARY, 15), clientAddress);
         Card card = BankCard.getInstance(new BankCardInfo("PETR", "IVANOV", "4256123542134526", "30/12", "152"), "1020", BankCardType.DEBET);
         SelfServiceDevice atm = new ATM("100000", atmAddress, dataBase, new ReliabilityOfSelfServiceDevice(1000));
-        CheckerBalance checkerBalance = new CheckerBalance(clientPassport, atm, card);
+        ATMClientService atmClientService = new ATMClient(clientPassport, atm, card);
+        CheckerBalance checkerBalance = new CheckerBalance(atmClientService);
         try {
             log.info(checkerBalance.checkBalance().toString());
             log.info(checkerBalance.checkBalance().toString());

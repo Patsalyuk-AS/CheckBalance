@@ -14,7 +14,7 @@ import java.security.NoSuchProviderException;
 
 @Getter
 @Setter
-public class ATMClient {
+public class ATMClient implements ATMClientService {
 
     @NotNull
     private Passport passport;
@@ -29,15 +29,15 @@ public class ATMClient {
         this.card = card;
     }
 
-    Result goToSelfServiceDevice() {
+    public Result goToSelfServiceDevice() {
         return new ClientMoving().move(Wish.YES);
     }
 
-    Result insertCard() throws SelfServiceDeviceBrokenException, NoSuchProviderException, NoSuchAlgorithmException {
+    public Result insertCard() throws SelfServiceDeviceBrokenException, NoSuchProviderException, NoSuchAlgorithmException {
         return selfServiceDevice.takeCard(card);
     }
 
-    Result getBackCard() throws SelfServiceDeviceBrokenException, NoSuchProviderException, NoSuchAlgorithmException {
+    public Result getBackCard() throws SelfServiceDeviceBrokenException, NoSuchProviderException, NoSuchAlgorithmException {
         return selfServiceDevice.giveBackCard(card);
     }
 
