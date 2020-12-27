@@ -1,6 +1,7 @@
 package com.github.patsalyukas.outsideclasses;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -8,6 +9,7 @@ import java.util.Map;
 import java.util.Set;
 
 @Slf4j
+@Component("DataBase")
 public class CardDataBase<E extends Card> implements CardDataBaseServices<E> {
 
     private final Map<E, Balance> cards = new HashMap<>();

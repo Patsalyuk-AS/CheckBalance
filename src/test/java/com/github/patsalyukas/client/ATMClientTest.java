@@ -19,6 +19,7 @@ import javax.validation.ValidatorFactory;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -41,7 +42,7 @@ class ATMClientTest {
     public static void setUp() throws IllegalCardParametersException {
         Address address = new Address("Moscow area", "Moscow", "Pionerskaya", "100");
         CardDataBase<Card> dataBase = new CardDataBase<>();
-        passport = new Passport(7900, 156423, "Ivanov", "Ivan", "Ivanovich", LocalDate.of(1980, 2, 15), address);
+        passport = new Passport(7900, 156423, "Ivanov", "Ivan", "Ivanovich", LocalDate.of(1980, Month.FEBRUARY, 15), address);
         card = BankCard.getInstance(new BankCardInfo("IVAN", "PETROV", "4256123542131234", "12/21", "652"), "1532", BankCardType.DEBET);
         selfServiceDevice = new ATM("100000", address, dataBase, new ReliabilityOfSelfServiceDevice(1000));
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
@@ -76,20 +77,20 @@ class ATMClientTest {
     void getPassport() {
         ATMClient atmClient = new ATMClient(null, selfServiceDevice, card);
         Set<ConstraintViolation<ATMClient>> constraintViolations = validator.validate(atmClient);
-        assertEquals("must not be null", constraintViolations.iterator().next().getMessage());
+        assertEquals("не должно равняться null", constraintViolations.iterator().next().getMessage());
     }
 
     @Test
     void getSelfServiceDevice() {
         ATMClient atmClient = new ATMClient(passport, null, card);
         Set<ConstraintViolation<ATMClient>> constraintViolations = validator.validate(atmClient);
-        assertEquals("must not be null", constraintViolations.iterator().next().getMessage());
+        assertEquals("не должно равняться null", constraintViolations.iterator().next().getMessage());
     }
 
     @Test
     void getCard() {
         ATMClient atmClient = new ATMClient(passport, selfServiceDevice, null);
         Set<ConstraintViolation<ATMClient>> constraintViolations = validator.validate(atmClient);
-        assertEquals("must not be null", constraintViolations.iterator().next().getMessage());
+        assertEquals("не должно равняться null", constraintViolations.iterator().next().getMessage());
     }
 }

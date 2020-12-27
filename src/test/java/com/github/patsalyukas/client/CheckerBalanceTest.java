@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.time.LocalDate;
+import java.time.Month;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -28,7 +29,7 @@ class CheckerBalanceTest {
     static void setUp() throws IllegalCardParametersException {
         card = BankCard.getInstance(new BankCardInfo("IVAN", "PETROV", "4256123542131234", "12/21", "652"), "1532", BankCardType.DEBET);
         address = new Address("Moscow area", "Moscow", "Pionerskaya", "100");
-        passport = new Passport(7900, 156423, "Ivanov", "Ivan", "Ivanovich", LocalDate.of(1980, 2, 15), address);
+        passport = new Passport(7900, 156423, "Ivanov", "Ivan", "Ivanovich", LocalDate.of(1980, Month.FEBRUARY, 15), address);
         selfServiceDevice = new ATM("100000", address, dataBase, new ReliabilityOfSelfServiceDevice(1000));
         client = new CheckerBalance(passport, selfServiceDevice, card);
         balance = new Balance(Currency.RUB, new BigDecimal("15000"));
