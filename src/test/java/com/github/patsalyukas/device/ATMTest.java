@@ -51,27 +51,27 @@ class ATMTest {
     void getNumberATM() {
         ATM atm = new ATM(null, address, dataBase, new ReliabilityOfSelfServiceDevice(1000));
         Set<ConstraintViolation<ATM>> constraintViolations = validator.validate(atm);
-        assertEquals("не должно равняться null", constraintViolations.iterator().next().getMessage());
+        assertEquals("must not be null", constraintViolations.iterator().next().getMessage());
     }
 
     @Test
     void getAddressATM() {
         ATM atm = new ATM("10000", null, dataBase, new ReliabilityOfSelfServiceDevice(1000));
         Set<ConstraintViolation<ATM>> constraintViolations = validator.validate(atm);
-        assertEquals("не должно равняться null", constraintViolations.iterator().next().getMessage());
+        assertEquals("must not be null", constraintViolations.iterator().next().getMessage());
     }
 
     @Test
     void getCardDataBase() {
         ATM atm = new ATM("10000", address, null, new ReliabilityOfSelfServiceDevice(1000));
         Set<ConstraintViolation<ATM>> constraintViolations = validator.validate(atm);
-        assertEquals("не должно равняться null", constraintViolations.iterator().next().getMessage());
+        assertEquals("must not be null", constraintViolations.iterator().next().getMessage());
     }
 
     @Test
     void getReliability() {
         ATM atm = new ATM("10000", address, dataBase, null);
         Set<ConstraintViolation<ATM>> constraintViolations = validator.validate(atm);
-        assertEquals("не должно равняться null", constraintViolations.iterator().next().getMessage());
+        assertEquals("must not be null", constraintViolations.iterator().next().getMessage());
     }
 }
