@@ -3,15 +3,20 @@ package com.github.patsalyukas.device;
 import com.github.patsalyukas.outsideclasses.*;
 import lombok.Value;
 
+import javax.validation.constraints.NotNull;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 
 @Value
 public class ATM implements SelfServiceDevice {
 
-    private final int numberATM;
+    @NotNull
+    private final String numberATM;
+    @NotNull
     private final Address addressATM;
+    @NotNull
     private final CardDataBaseServices<Card> cardDataBase;
+    @NotNull
     private final Reliability reliability;
 
     @Override

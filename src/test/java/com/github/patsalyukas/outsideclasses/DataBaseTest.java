@@ -9,14 +9,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DataBaseTest {
 
-    CardDataBase<Card> dataBase = new CardDataBase<>(new BankCardFactory());
-    Card card1 = new BankCard("IVAN", "PETROV", "4256123542131234", "12/21", "1532", "652", BankCardType.DEBET);
-    Card card2 = new BankCard("IVAN", "PETROV", "4256123542134526", "12/21", "1532", "652", BankCardType.DEBET);
+    CardDataBase<Card> dataBase = new CardDataBase<>();
+
+    Card card1 = BankCard.getInstance(new BankCardInfo("IVAN", "PETROV", "4256123542131234", "12/21", "652"), "1532", BankCardType.DEBET);
+    Card card2 = BankCard.getInstance(new BankCardInfo("IVAN", "PETROV", "4256123542134526", "12/21", "652"), "1532", BankCardType.DEBET);
     Balance balance = new Balance(Currency.RUB, new BigDecimal("15000"));
+
+    DataBaseTest() throws IllegalCardParametersException {
+    }
 
     @BeforeEach
     void setUp() throws IllegalCardParametersException {
-        dataBase.initializeDataBase();
+        DataBaseIninializer.initializeDataBase(dataBase);
     }
 
     @Test
@@ -28,8 +32,6 @@ class DataBaseTest {
     @Test
     void getBalance() throws BankException {
         assertEquals(balance, dataBase.getBalance(card1));
-
     }
-
 
 }

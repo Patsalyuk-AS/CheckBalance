@@ -1,22 +1,28 @@
 package com.github.patsalyukas.outsideclasses;
 
-import lombok.Value;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
 
-@Value
+@Getter
+@ToString
+@EqualsAndHashCode
 public class BankCard implements Card {
 
-    private final String firstName;
-    private final String lastName;
-    private final String cardNumber;
-    private final String expDate;
+    private final BankCardInfo cardInfo;
     private final String pin;
-    private final String cvi;
     private final BankCardType type;
 
-    @Override
-    public String getNumber() {
-        return (getCardNumber());
+    private BankCard(BankCardInfo cardInfo, String pin, BankCardType type) {
+        this.cardInfo = cardInfo;
+        this.pin = pin;
+        this.type = type;
     }
 
-
+    public static BankCard getInstance(BankCardInfo cardInfo, String pin, BankCardType type) throws IllegalCardParametersException {
+        if (!CardValidator.validateCardParameters(cardInfo, pin)) {
+            throw new IllegalCardParametersException("Card parameters are wrong!");
+        }
+        return new BankCard(cardInfo, pin, type);
+    }
 }

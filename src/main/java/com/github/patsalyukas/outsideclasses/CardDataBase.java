@@ -1,24 +1,19 @@
 package com.github.patsalyukas.outsideclasses;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Stream;
 
 @Slf4j
+@Component("DataBase")
 public class CardDataBase<E extends Card> implements CardDataBaseServices<E> {
 
     private final Map<E, Balance> cards = new HashMap<>();
-    private final FactoryForCards<E> factoryForCards;
     private final Set<E> requestsOfBalances = new HashSet<>(20);
-
-    public CardDataBase(FactoryForCards<E> factoryForCards) {
-        this.factoryForCards = factoryForCards;
-    }
 
     @Override
     public boolean validateCard(E e) {
@@ -37,14 +32,17 @@ public class CardDataBase<E extends Card> implements CardDataBaseServices<E> {
     }
 
     @Override
-    public void showHistoryOfRequestsOfBalances() {
-        Stream<E> cardStream = requestsOfBalances.stream();
-        cardStream.forEach(card -> log.info(card.toString()));
+    public void getHistoryOfRequestsOfBalances() {
+        requestsOfBalances.forEach(card -> log.info(card.toString()));
+    }
+
+    public void getCardsFromDataBase() {
+        cards.forEach((k, v) -> log.info(k + " " + v));
     }
 
     @Override
-    public void addCardToDataBase(E e, Balance balance) throws IllegalCardParametersException {
-        cards.put(factoryForCards.createCard(e), balance);
+    public void addCardToDataBase(E e, Balance balance) {
+        cards.put(e, balance);
     }
 
     @Override
@@ -58,15 +56,5 @@ public class CardDataBase<E extends Card> implements CardDataBaseServices<E> {
         }
     }
 
-    //вспомогательный метод для наполнения базы
-    public void initializeDataBase() throws IllegalCardParametersException {
-        addCardToDataBase(factoryForCards.createCard("IVAN", "PETROV", "4256123542131234", "12/21", "1532", "652", BankCardType.DEBET), factoryForCards.createBalance(Currency.RUB, new BigDecimal("15000")));
-        addCardToDataBase(factoryForCards.createCard("PETR", "IVANOV", "4256123542134526", "30/12", "1020", "152", BankCardType.DEBET), factoryForCards.createBalance(Currency.RUB, new BigDecimal("30000")));
-        addCardToDataBase(factoryForCards.createCard("SERGEY", "SIDOROV", "4256123542137536", "15/22", "2534", "752", BankCardType.DEBET), factoryForCards.createBalance(Currency.RUB, new BigDecimal("1000")));
-        addCardToDataBase(factoryForCards.createCard("ELENA", "IVANOVA", "4256123542131526", "05/22", "8563", "632", BankCardType.DEBET), factoryForCards.createBalance(Currency.RUB, new BigDecimal("5000")));
-        addCardToDataBase(factoryForCards.createCard("OXANA", "PETROVA", "4256123542131010", "24/22", "1145", "752", BankCardType.DEBET), factoryForCards.createBalance(Currency.RUB, new BigDecimal("4000")));
-        addCardToDataBase(factoryForCards.createCard("SVETLANA", "SIDOROVA", "4256123542132233", "11/21", "5462", "156", BankCardType.DEBET), factoryForCards.createBalance(Currency.RUB, new BigDecimal("2000")));
-
-    }
 
 }
