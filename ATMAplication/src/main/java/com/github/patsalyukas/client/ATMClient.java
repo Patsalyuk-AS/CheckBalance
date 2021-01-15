@@ -1,5 +1,6 @@
 package com.github.patsalyukas.client;
 
+import com.github.patsalyukas.common.utils.Wish;
 import com.github.patsalyukas.device.SelfServiceDevice;
 import com.github.patsalyukas.device.SelfServiceDeviceBrokenException;
 import com.github.patsalyukas.outsideclasses.Card;

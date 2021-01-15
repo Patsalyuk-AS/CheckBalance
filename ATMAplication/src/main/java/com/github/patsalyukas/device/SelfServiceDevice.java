@@ -1,6 +1,9 @@
 package com.github.patsalyukas.device;
 
-import com.github.patsalyukas.outsideclasses.*;
+import com.github.patsalyukas.outsideclasses.Balance;
+import com.github.patsalyukas.outsideclasses.BankException;
+import com.github.patsalyukas.outsideclasses.Card;
+import com.github.patsalyukas.outsideclasses.Result;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;

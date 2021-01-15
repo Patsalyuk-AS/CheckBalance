@@ -1,6 +1,7 @@
 package com.github.patsalyukas.outsideclasses;
 
-import com.github.patsalyukas.client.Wish;
+
+import com.github.patsalyukas.common.utils.Wish;
 
 public interface Moving {
 

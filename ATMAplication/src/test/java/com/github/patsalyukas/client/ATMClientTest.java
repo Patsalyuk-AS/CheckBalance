@@ -1,5 +1,6 @@
 package com.github.patsalyukas.client;
 
+import com.github.patsalyukas.common.utils.Wish;
 import com.github.patsalyukas.device.ATM;
 import com.github.patsalyukas.device.ReliabilityOfSelfServiceDevice;
 import com.github.patsalyukas.device.SelfServiceDevice;
@@ -77,6 +78,7 @@ class ATMClientTest {
     void getPassport() {
         ATMClient atmClient = new ATMClient(null, selfServiceDevice, card);
         Set<ConstraintViolation<ATMClient>> constraintViolations = validator.validate(atmClient);
+        System.out.println(constraintViolations.iterator().next().getMessage());
         assertEquals("must not be null", constraintViolations.iterator().next().getMessage());
     }
 

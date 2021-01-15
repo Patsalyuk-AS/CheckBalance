@@ -6,13 +6,18 @@
 
     <groupId>com.github.patsalyukas</groupId>
     <artifactId>CheckBalance</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>common</module>
+        <module>ATMAplication</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <mainClass>com.github.patsalyukas.Main</mainClass>
+        <mainClass>Main</mainClass>
         <sonar.projectKey>Patsalyuk-AS_CheckBalance</sonar.projectKey>
         <sonar.organization>patsalyuk-as</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
@@ -97,7 +102,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.github.patsalyukas.Main</mainClass>
+                            <mainClass>Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -116,7 +121,7 @@
                     <!-- ... -->
                     <archive>
                         <manifest>
-                            <mainClass>com.github.patsalyukas.Main</mainClass>
+                            <mainClass>Main</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

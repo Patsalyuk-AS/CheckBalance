@@ -1,6 +1,7 @@
 package com.github.patsalyukas.outsideclasses;
 
 import lombok.Value;
+
 import java.math.BigDecimal;
 
 @Value

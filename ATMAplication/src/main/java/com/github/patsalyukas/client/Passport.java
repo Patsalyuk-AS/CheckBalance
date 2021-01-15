@@ -1,8 +1,9 @@
 package com.github.patsalyukas.client;
 
-import lombok.Value;
-import java.time.LocalDate;
 import com.github.patsalyukas.outsideclasses.Address;
+import lombok.Value;
+
+import java.time.LocalDate;
 
 @Value
 public class Passport {

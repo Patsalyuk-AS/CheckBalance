@@ -1,6 +1,6 @@
 package com.github.patsalyukas.outsideclasses;
 
-import com.github.patsalyukas.client.Wish;
+import com.github.patsalyukas.common.utils.Wish;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
