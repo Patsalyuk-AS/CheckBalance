@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 
+//@Service
 public class CheckerBalance implements BalanceOperation {
 
     private Balance balance;
