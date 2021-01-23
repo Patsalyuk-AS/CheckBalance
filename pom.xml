@@ -6,16 +6,23 @@
 
     <groupId>com.github.patsalyukas</groupId>
     <artifactId>CheckBalance</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>common</module>
+        <module>ATMAplication</module>
+    </modules>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.4.1</version>
+        <relativePath/>
+    </parent>
 
     <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <mainClass>com.github.patsalyukas.Main</mainClass>
-        <sonar.projectKey>Patsalyuk-AS_CheckBalance</sonar.projectKey>
-        <sonar.organization>patsalyuk-as</sonar.organization>
-        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <mainClass>Main</mainClass>
         <spring-version>5.2.3.RELEASE</spring-version>
     </properties>
 
@@ -64,69 +71,23 @@
             <artifactId>jakarta.el</artifactId>
             <version>3.0.3</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>${spring-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-            <version>${spring-version}</version>
-        </dependency>
+        <!--
+               <dependency>
+                   <groupId>org.springframework</groupId>
+                   <artifactId>spring-core</artifactId>
+                   <version>${spring-version}</version>
+               </dependency>
+               <dependency>
+                   <groupId>org.springframework</groupId>
+                   <artifactId>spring-context</artifactId>
+                   <version>${spring-version}</version>
+               </dependency>
+               <dependency>
+                   <groupId>org.springframework</groupId>
+                   <artifactId>spring-beans</artifactId>
+                   <version>${spring-version}</version>
+               </dependency>
+               -->
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M5</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.2.0</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.github.patsalyukas.Main</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <!-- ... -->
-                    <archive>
-                        <manifest>
-                            <mainClass>com.github.patsalyukas.Main</mainClass>
-                        </manifest>
-                    </archive>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                </configuration>
-            </plugin>
-        </plugins>
-
-    </build>
-
 
 </project>
