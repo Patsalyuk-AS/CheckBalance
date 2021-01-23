@@ -24,6 +24,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <mainClass>Main</mainClass>
         <spring-version>5.2.3.RELEASE</spring-version>
+        <sonar.projectKey>Patsalyuk-AS_CheckBalance</sonar.projectKey>
+        <sonar.organization>patsalyuk-as</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 
     <dependencies>
