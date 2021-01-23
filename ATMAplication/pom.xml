@@ -13,7 +13,7 @@
 
     <properties>
         <mainClass>com.github.patsalyukas.Main</mainClass>
-        <sonar.projectKey>Patsalyuk-AS_ATMAplication</sonar.projectKey>
+        <sonar.projectKey>Patsalyuk-AS_CheckBalance</sonar.projectKey>
         <sonar.organization>patsalyuk-as</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
