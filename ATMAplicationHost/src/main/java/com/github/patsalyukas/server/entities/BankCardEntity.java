@@ -1,6 +1,6 @@
 package com.github.patsalyukas.server.entities;
 
-import com.github.patsalyukas.server.outsideclasses.BankCardType;
+import com.github.patsalyukas.common.utils.BankCardType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
