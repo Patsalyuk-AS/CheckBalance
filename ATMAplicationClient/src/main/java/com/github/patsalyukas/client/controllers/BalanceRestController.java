@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class BalanceRestController {
 
+
     @NonNull
     private CheckBalanceService checkBalanceService;
 

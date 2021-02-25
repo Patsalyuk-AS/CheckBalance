@@ -1,18 +1,9 @@
 package com.github.patsalyukas.server.services;
 
 import com.github.patsalyukas.server.entities.BankCardEntity;
-import com.github.patsalyukas.server.excepions.CardNotFoundException;
-import com.github.patsalyukas.server.repository.BankCardCrudRepository;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
 
-@Service
-@AllArgsConstructor
-public class BankCardService {
+public interface BankCardService {
 
-    private BankCardCrudRepository bankCardCrudRepository;
+    BankCardEntity getBankCard(String cardNumber);
 
-    public BankCardEntity getBankCard(String cardNumber) {
-        return bankCardCrudRepository.findByCardNumber(cardNumber).orElseThrow(CardNotFoundException::new);
-    }
 }
