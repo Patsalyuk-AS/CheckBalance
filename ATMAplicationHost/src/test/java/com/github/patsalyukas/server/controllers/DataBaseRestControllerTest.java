@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ExtendWith(SpringExtension.class)
 class DataBaseRestControllerTest {
 
@@ -22,7 +22,7 @@ class DataBaseRestControllerTest {
 
     @Test
     void getBalance() {
-        BalanceDTO balanceDTO = dataBaseRestController.getBalance("4256123542137536", new BankCardDTO("4256123542137536", "7412"));
+        BalanceDTO balanceDTO = dataBaseRestController.getBalance("10000001", "4256123542137536", new BankCardDTO("4256123542137536", "7412"));
         assertEquals(new BigDecimal("1000.50"), balanceDTO.getBalance());
         assertEquals(Currency.RUB, balanceDTO.getCurrency());
     }
