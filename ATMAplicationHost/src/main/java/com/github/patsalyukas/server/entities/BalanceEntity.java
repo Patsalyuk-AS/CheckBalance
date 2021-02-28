@@ -28,5 +28,4 @@ public class BalanceEntity {
     @JoinColumn(name = "card_id", nullable = false)
     private BankCardEntity cardID;
 
-
 }
