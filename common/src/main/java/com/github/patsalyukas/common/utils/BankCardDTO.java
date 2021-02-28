@@ -10,5 +10,6 @@ import lombok.Setter;
 public class BankCardDTO {
 
     private String cardNumber;
+    private String pin;
 
 }
