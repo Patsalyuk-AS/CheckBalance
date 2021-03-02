@@ -26,4 +26,5 @@ class DataBaseRestControllerTest {
         assertEquals(new BigDecimal("1000.50"), balanceDTO.getBalance());
         assertEquals(Currency.RUB, balanceDTO.getCurrency());
     }
+
 }
