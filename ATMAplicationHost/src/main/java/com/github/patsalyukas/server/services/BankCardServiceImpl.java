@@ -12,6 +12,7 @@ public class BankCardServiceImpl implements BankCardService {
 
     private BankCardCrudRepository bankCardCrudRepository;
 
+    @Override
     public BankCardEntity getBankCard(String cardNumber) {
         return bankCardCrudRepository.findByCardNumber(cardNumber).orElseThrow(CardNotFoundException::new);
     }
