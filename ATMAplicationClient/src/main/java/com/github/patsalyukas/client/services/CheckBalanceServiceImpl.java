@@ -4,11 +4,13 @@ import com.github.patsalyukas.common.utils.BalanceDTO;
 import com.github.patsalyukas.common.utils.BankCardDTO;
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.client.RestTemplate;
 
 import javax.validation.constraints.Pattern;
 
 @Service
+@Validated
 public class CheckBalanceServiceImpl implements CheckBalanceService {
 
     @Override
