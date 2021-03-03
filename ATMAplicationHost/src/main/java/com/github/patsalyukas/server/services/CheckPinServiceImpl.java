@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CheckPinServiceImpl implements CheckPinService {
 
+    @Override
     public void checkPin(@NonNull BankCardEntity bankCardEntity, @NonNull BankCardDTO bankCardDTO) {
         if (!bankCardEntity.getPin().equals(bankCardDTO.getPin())) {
             throw new InvalidPinException();

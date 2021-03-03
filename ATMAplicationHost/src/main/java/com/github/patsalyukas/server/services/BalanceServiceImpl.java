@@ -14,6 +14,7 @@ public class BalanceServiceImpl implements BalanceService {
 
     private BalanceCrudRepository balanceCrudRepository;
 
+    @Override
     public BalanceDTO getBalance(BankCardEntity cardID) {
         BalanceEntity balanceEntity = balanceCrudRepository.findByCardID(cardID).orElseThrow(BalanceNotFoundException::new);
         return new BalanceDTO(balanceEntity.getBalance(), balanceEntity.getCurrency());
